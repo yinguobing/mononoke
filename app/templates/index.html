@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block header %}
+<h1>{% block title %}Summary{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h2>Total videos: {{summary['video_count']}}</h2>
+<h2>Total images: {{summary['video_count']}}</h2>
+{% endblock %}
