@@ -9,7 +9,7 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, "mononoke.sqlite"))
-    
+
     if test_config is None:
         app.config.from_pyfile('config.py', silent=True)
     else:
@@ -20,11 +20,14 @@ def create_app(test_config=None):
     except:
         pass
 
-    from . import db
-    db.init_app(app)
-    
     @app.route('/hello')
     def hello():
         return 'hello world.'
+
+    from . import db
+    db.init_app(app)
+
+    from . import auth
+    app.register_blueprint(auth.bp)
 
     return app
