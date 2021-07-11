@@ -14,11 +14,12 @@
                 <span class="navbar-brand mb-0 h1">Mononoke</span>
             </div>
         </nav>
+        {% block header %}{% endblock %}
     </header>
 
     <main class="flex-shrink-0">
         <div class="container">
-            <h1 class="mt-5">{% block header %}{% endblock %}</h1>
+            <h1 class="mt-5">{% block head %}{% endblock %}</h1>
             {% for message in get_flashed_messages() %}
             <div>{{ message }}</div>
             {% endfor %}
