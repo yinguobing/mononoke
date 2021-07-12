@@ -15,3 +15,11 @@ def index():
     summary = {'video_count': video_count,
                'image_count': image_count}
     return render_template('index.html', summary=summary)
+
+
+@bp.route('/<name>/')
+def show_collection(name):
+    db = get_db()
+    collection = db.get_collection(name)
+    samples = [s for s in collection.find({})]
+    return render_template('list.html', name=name, samples=samples)
