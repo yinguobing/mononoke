@@ -8,9 +8,9 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE_ADD="localhost",
         DATABASE_PORT=27017,
-        DATABASE_USERNAME="mongoadmin",
+        DATABASE_USERNAME="dwarf",
         DATABASE_PASSWORD='secret',
-        DATABASE_AUTHSOURCE='admin')
+        DATABASE_AUTHSOURCE='dwarf')
 
     if test_config is None:
         app.config.from_pyfile('config.py', silent=True)
