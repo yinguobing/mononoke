@@ -11,24 +11,27 @@
     <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm border-primary">
             <div class="card-header py-3 text-white bg-primary border-primary">
-                <h4 class="my-0 fw-normal">Videos</h4>
+                <h4 class="my-0 fw-normal">Images</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title">{{summary['video_count']}}<small
-                        class="text-muted fw-light">段</small></h1>
+                <h1 class="card-title">{{summary['image_count']}} <small class="text-muted fw-light">张</small></h1>
+                <p class="card-text">以图像形式存储的数据。<br>主要包括jpg, png等格式。</p>
+                <a class="btn w-40 btn-lg btn-outline-primary" href="/images" role="button">查看</a>
             </div>
         </div>
     </div>
     <div class="col">
         <div class="card mb-4 rounded-3 shadow-sm border-primary">
             <div class="card-header py-3 text-white bg-primary border-primary">
-                <h4 class="my-0 fw-normal">Images</h4>
+                <h4 class="my-0 fw-normal">Videos</h4>
             </div>
             <div class="card-body">
-                <h1 class="card-title">{{summary['image_count']}}<small
-                        class="text-muted fw-light">张</small></h1>
+                <h1 class="card-title">{{summary['video_count']}} <small class="text-muted fw-light">段</small></h1>
+                <p class="card-text">以视频形式存储的数据，<br>主要包括mp4, avi等格式。</p>
+                <a class="btn w-40 btn-lg btn-outline-primary" href="/videos" role="button">查看</a>
             </div>
         </div>
     </div>
+
 </div>
 {% endblock %}
