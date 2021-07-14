@@ -14,16 +14,16 @@
             <th scope="col">#</th>
             <th scope="col">文件名</th>
             <th scope="col">标签</th>
-            <th scope="col">地址</th>
+            <th scope="col">下载地址</th>
         </tr>
     </thead>
     <tbody>
         {% for sample in samples %}
         <tr>
             <th scope="row">{{loop.index}}</th>
-            <td>{{ sample['basename'] }}</td>
-            <td>{{ sample['tags'] }}</td>
-            <td>{{ sample['path']}}</td>
+            <td>{{ sample['base_name'] }}</td>
+            <td>{{ sample['manual_tags'] }}</td>
+            <td><button type="button" class="btn btn-outline-dark disabled">下载</button></td>
         </tr>
         {% endfor %}
     </tbody>
