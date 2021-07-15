@@ -14,7 +14,9 @@ def index():
     image_count = db.images.count_documents({})
     summary = {'video_count': video_count,
                'image_count': image_count}
-    return render_template('index.html', summary=summary)
+    videos = [v for v in db.videos.find().sort("index_time", -1).limit(5)]
+    images = [i for i in db.images.find().sort("index_time", -1).limit(5)]
+    return render_template('index.html', summary=summary, videos=videos, images=images)
 
 
 @bp.route('/<name>/')
