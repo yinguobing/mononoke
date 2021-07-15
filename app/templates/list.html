@@ -17,6 +17,23 @@
 {% block content %}
 {% if samples %}
 <p>以下为现有数据记录，最多显示50条。</p>
+<div class="row mt-5 mb-5">
+    <div class="input-group mr-3 col">
+        <span class="input-group-text" id="basic-addon1">文件名</span>
+        <input type="text" class="form-control" placeholder="文件名" aria-label="filename" aria-describedby="basic-addon1">
+    </div>
+    <div class="input-group mr-3 col">
+        <span class="input-group-text" id="basic-addon1">标签</span>
+        <input type="text" class="form-control" placeholder="标签" aria-label="label" aria-describedby="basic-addon2">
+    </div>
+    <div class="input-group mr-3 col">
+        <span class="input-group-text" id="basic-addon1">作者</span>
+        <input type="text" class="form-control" placeholder="名字" aria-label="label" aria-describedby="basic-addon2">
+    </div>
+    <div class="col">
+        <button type="button" class="btn btn-primary">筛选</button>
+    </div>
+</div>
 <table class="table table-striped table-hover">
     <thead>
         <tr>
