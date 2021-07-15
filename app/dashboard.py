@@ -23,5 +23,5 @@ def index():
 def show_collection(name):
     db = get_db()
     collection = db.get_collection(name)
-    samples = [s for s in collection.find({})]
+    samples = [s for s in collection.find({}).limit(50)]
     return render_template('list.html', name=name, samples=samples)
