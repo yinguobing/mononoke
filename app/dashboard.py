@@ -12,8 +12,8 @@ def index():
     db = get_db()
     video_count = db.videos.count_documents({})
     image_count = db.images.count_documents({})
-    summary = {'video_count': video_count,
-               'image_count': image_count}
+    summary = {'video_count': "{:,}".format(video_count),
+               'image_count': "{:,}".format(image_count)}
     videos = [v for v in db.videos.find().sort("index_time", -1).limit(5)]
     images = [i for i in db.images.find().sort("index_time", -1).limit(5)]
     return render_template('index.html', summary=summary, videos=videos, images=images)
