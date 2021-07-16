@@ -30,12 +30,24 @@
             <td>{{ sample['base_name'] }}</td>
         </tr>
         <tr>
+            <th>作者</th>
+            <td>{{ sample['authors'] }}</td>
+        </tr>
+        <tr>
             <th>标签</th>
             <td>{{ sample['manual_tags'] }}</td>
         </tr>
         <tr>
-            <th>下载</th>
-            <td><button type="button" class="btn btn-outline-dark disabled">下载</button></td>
+            <th>时间</th>
+            <td>{{ sample['index_time'] }}</td>
+        </tr>
+        <tr>
+            <th>大小</th>
+            <td>{{ sample['file_size'] }}</td>
+        </tr>
+        <tr>
+            <th>HASH</th>
+            <td>{{ sample['hash'] }}</td>
         </tr>
     </tbody>
 </table>
