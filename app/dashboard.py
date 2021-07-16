@@ -1,5 +1,6 @@
-from flask import Blueprint, flash, g, redirect, render_template, request, url_for
-
+from bson.objectid import ObjectId
+from flask import (Blueprint, flash, g, redirect, render_template, request,
+                   url_for)
 from werkzeug.exceptions import abort
 
 from app.db import get_db
@@ -25,3 +26,10 @@ def show_collection(name):
     collection = db.get_collection(name)
     samples = [s for s in collection.find({}).limit(50)]
     return render_template('list.html', name=name, samples=samples)
+
+@bp.route('/<name>/<string:id>')
+def preview(name, id):
+    db = get_db()
+    collection = db.get_collection(name)
+    sample = collection.find_one({'_id': ObjectId(id)})
+    return render_template('preview.html', id=id, name=name, sample=sample)
