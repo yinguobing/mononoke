@@ -34,7 +34,7 @@
         <div class="container">
             <p></p>
             {% block breadcrumb %}{% endblock %}
-            <h1 class="mt-5">{% block head %}{% endblock %}</h1>
+            <h1 class="mt-5 mb-3">{% block head %}{% endblock %}</h1>
             {% for message in get_flashed_messages() %}
             <div>{{ message }}</div>
             {% endfor %}
