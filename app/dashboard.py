@@ -39,10 +39,18 @@ def format_record(collection_name, record):
     record.update({'href': url_for('dashboard.preview', name=collection_name,
                                    id=record['_id'])})
 
+
 def format_records(collection_name, records):
     for s in records:
         format_record(collection_name, s)
 
+
+def generate_static_link(record):
+    """Generate a href link for the static file."""
+    file_path = record['path'].split(os.path.sep)[-2:]
+    file_path = "{}/{}".format(file_path[0], file_path[1])
+    
+    return url_for('dashboard.static', filename=file_path)
 
 @bp.route('/')
 def index():
@@ -51,8 +59,13 @@ def index():
     image_count = db.images.count_documents({})
     summary = {'video_count': "{:,}".format(video_count),
                'image_count': "{:,}".format(image_count)}
+
     videos = [v for v in db.videos.find().sort("index_time", -1).limit(5)]
+    format_records('videos', videos)
+
     images = [i for i in db.images.find().sort("index_time", -1).limit(5)]
+    format_records('images', images)
+
     return render_template('index.html', summary=summary, videos=videos, images=images)
 
 
@@ -70,12 +83,11 @@ def preview(name, id):
     db = get_db()
     collection = db.get_collection(name)
     sample = collection.find_one({'_id': ObjectId(id)})
-    file_path = sample['path'].split(os.path.sep)[-2:]
-    file_path = "{}/{}".format(file_path[0], file_path[1])
-    download_link = url_for('dashboard.static', filename=file_path)
+    download_link = generate_static_link(sample)
     format_record(name, sample)
     return render_template('preview.html', name=name, sample=sample, download_link=download_link)
 
-# @bp.route('/originals/<path:filename>')
+
+@bp.route('/originals/<path:filename>')
 def originals(filename):
     return send_from_directory(bp.static_folder, filename)
