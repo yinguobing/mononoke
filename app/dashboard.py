@@ -7,7 +7,8 @@ from werkzeug.exceptions import abort
 
 from app.db import get_db
 
-bp = Blueprint('dashboard', __name__, static_folder='/Users/Robin/data/originals')
+bp = Blueprint('dashboard', __name__,
+               static_folder='/Users/Robin/data/originals')
 
 
 @bp.route('/')
@@ -27,7 +28,16 @@ def show_collection(name):
     db = get_db()
     collection = db.get_collection(name)
     samples = [s for s in collection.find({}).limit(50)]
-    return render_template('list.html', name=name, samples=samples)
+    preview_links = []
+    for s in samples:
+        preview_links.append(url_for('dashboard.preview',
+                                     name=name,
+                                     id=s['_id']))
+    data = zip(preview_links, samples)
+    return render_template('list.html',
+                           name=name,
+                           data=data)
+
 
 @bp.route('/<name>/<string:id>')
 def preview(name, id):
