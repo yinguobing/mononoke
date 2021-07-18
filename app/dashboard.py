@@ -2,13 +2,13 @@ import os
 
 from bson.objectid import ObjectId
 from flask import (Blueprint, flash, g, redirect, render_template, request,
-                   url_for)
+                   url_for, send_from_directory, safe_join)
 from werkzeug.exceptions import abort
 
 from app.db import get_db
 
 bp = Blueprint('dashboard', __name__,
-               static_folder='/Users/Robin/data/originals')
+               static_folder='/Users/Robin/data/warehouse/originals')
 
 
 def sizeof_file(num, suffix='B'):
@@ -76,6 +76,6 @@ def preview(name, id):
     format_record(name, sample)
     return render_template('preview.html', name=name, sample=sample, download_link=download_link)
 
-# @bp.route('/originals/<path:path>')
-# def download(path):
-#     return url_for()
+# @bp.route('/originals/<path:filename>')
+def originals(filename):
+    return send_from_directory(bp.static_folder, filename)
