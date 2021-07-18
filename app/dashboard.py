@@ -1,3 +1,5 @@
+import os
+
 from bson.objectid import ObjectId
 from flask import (Blueprint, flash, g, redirect, render_template, request,
                    url_for)
@@ -5,7 +7,7 @@ from werkzeug.exceptions import abort
 
 from app.db import get_db
 
-bp = Blueprint('blog', __name__)
+bp = Blueprint('dashboard', __name__, static_folder='/Users/Robin/data/originals')
 
 
 @bp.route('/')
@@ -32,4 +34,7 @@ def preview(name, id):
     db = get_db()
     collection = db.get_collection(name)
     sample = collection.find_one({'_id': ObjectId(id)})
-    return render_template('preview.html', id=id, name=name, sample=sample)
+    file_path = sample['path'].split(os.path.sep)[-2:]
+    file_path = "/{}/{}".format(file_path[0], file_path[1])
+    download_link = url_for('dashboard.static', filename=file_path)
+    return render_template('preview.html', id=id, name=name, sample=sample, download_link=download_link)
