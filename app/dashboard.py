@@ -61,9 +61,13 @@ def index():
                'image_count': "{:,}".format(image_count)}
 
     videos = [v for v in db.videos.find().sort("index_time", -1).limit(5)]
+    for v in videos:
+        v.update({'href': generate_static_link(v)})
     format_records('videos', videos)
 
     images = [i for i in db.images.find().sort("index_time", -1).limit(5)]
+    for i in images:
+        i.update({'href': generate_static_link(i)})
     format_records('images', images)
 
     return render_template('index.html', summary=summary, videos=videos, images=images)

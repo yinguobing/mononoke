@@ -51,7 +51,7 @@
                 {% for image in images %}
                 <tr>
                     <th scope="row">{{loop.index}}</th>
-                    <td>{{ image['base_name'] }}</td>
+                    <td><a href="{{ image['href'] }}"> {{ image['base_name'] }}</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
