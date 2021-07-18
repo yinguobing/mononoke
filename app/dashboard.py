@@ -71,7 +71,11 @@ def preview(name, id):
     collection = db.get_collection(name)
     sample = collection.find_one({'_id': ObjectId(id)})
     file_path = sample['path'].split(os.path.sep)[-2:]
-    file_path = "/{}/{}".format(file_path[0], file_path[1])
+    file_path = "{}/{}".format(file_path[0], file_path[1])
     download_link = url_for('dashboard.static', filename=file_path)
     format_record(name, sample)
     return render_template('preview.html', name=name, sample=sample, download_link=download_link)
+
+# @bp.route('/originals/<path:path>')
+# def download(path):
+#     return url_for()
