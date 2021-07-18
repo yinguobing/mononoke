@@ -15,7 +15,7 @@
 {% block head %}{{ name }}{% endblock %}
 
 {% block content %}
-{% if data %}
+{% if samples %}
 <p>以下为现有数据记录，最多显示50条。</p>
 <div class="row mt-5 mb-5">
     <div class="input-group mr-3 col">
@@ -45,10 +45,10 @@
         </tr>
     </thead>
     <tbody>
-        {% for href, sample in data %}
+        {% for sample in samples %}
         <tr>
             <th scope="row">{{loop.index}}</th>
-            <td><a href="{{ href }}">{{ sample['base_name'] }}</a></td>
+            <td><a href="{{ sample['href'] }}">{{ sample['base_name'] }}</a></td>
             <td>{{ sample['manual_tags'] }}</td>
             <td>{{ sample['authors'] }}</td>
             <td>{{ sample['index_time'] }}</td>

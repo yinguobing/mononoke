@@ -30,13 +30,13 @@ def show_collection(name):
     samples = [s for s in collection.find({}).limit(50)]
     preview_links = []
     for s in samples:
-        preview_links.append(url_for('dashboard.preview',
-                                     name=name,
-                                     id=s['_id']))
-    data = zip(preview_links, samples)
-    return render_template('list.html',
-                           name=name,
-                           data=data)
+        s.update({'manual_tags': ', '.join((s['manual_tags']))})
+        s.update({'authors': ', '.join((s['authors']))})
+        s.update({'index_time': s['index_time'].strftime("%Y-%m-%d")})
+        s.update(
+            {'href': url_for('dashboard.preview', name=name, id=s['_id'])})
+
+    return render_template('list.html', name=name, samples=samples)
 
 
 @bp.route('/<name>/<string:id>')
